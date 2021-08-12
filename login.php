@@ -28,7 +28,7 @@
             if($hash_md5 == $stored_hash){
                 $_SESSION['name'] =$_POST['who'];
                 error_log("Login success ".$_POST['who']);
-                header("Location:view.php");
+                header("Location:index.php");
                 return;
 
                 

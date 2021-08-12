@@ -1,7 +1,7 @@
 <?php
     session_start();
     if(!isset($_SESSION['name'])){
-        die('Not logged in');
+        die("ACCESS DENIED");
     }
 
     require_once "PDO.php";
@@ -25,7 +25,7 @@
                 ':mileage' => $_POST['mileage'])
             );
             $_SESSION['success'] = "Record inserted";
-            header("Location: view.php");
+            header("Location: index.php");
             return;
         }
     }

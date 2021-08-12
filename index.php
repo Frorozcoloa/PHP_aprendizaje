@@ -2,10 +2,6 @@
     session_start();
     require_once  'PDO.php';
 
-    if(!isset($_SESSION['name'])){
-        die("Not Logged in");
-
-    }
     
 $stmt = $pdo->query("SELECT * FROM autos");
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -19,25 +15,20 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <div class="container">
-        <h1> Tracking Autos for <?php echo($_SESSION['name'])?></h1>
+    <h2>Welcome to the Automobiles Database (881cb553)</h2>
         <?php 
         if ( isset($_SESSION['success']) ){
             echo('<p style="color: green;">'.htmlentities($_SESSION['success'])."</p>\n");
             unset($_SESSION['success']);
+            if (isset($_SESSION['error'])) {
+                echo('<p style="color: red;">' . htmlentities($_SESSION['error']) . "</p>\n");
+                unset($_SESSION['error']);
+            }
         }
         ?>
         </form>
         <h2>Automobiles</h2>
-        <?php
-    if (isset($_SESSION['success'])) {
-        echo('<p style="color: green;">' . htmlentities($_SESSION['success']) . "</p>\n");
-        unset($_SESSION['success']);
-    }
-    if (isset($_SESSION['error'])) {
-        echo('<p style="color: red;">' . htmlentities($_SESSION['error']) . "</p>\n");
-        unset($_SESSION['error']);
-    }
-    ?>
+    
 
     
 
@@ -82,7 +73,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             echo "<p><a href='login.php'>Please log in</a></p><p>Attempt to <a href='add.php'>add data</a> without logging in</p>";
         } ?>
-        <p><a href="add.php">Add New</a>|<a href="logout.php">logout</a></p>
+
         </div>
 </body>
 </html>

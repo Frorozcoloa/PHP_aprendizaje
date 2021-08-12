@@ -1,7 +1,7 @@
 <?php
 session_start();
     if(!isset($_SESSION['name'])){
-        die('Not logged in');
+        die("ACCESS DENIED");
     }
 
     require_once "PDO.php";
@@ -9,12 +9,12 @@ session_start();
     if(isset($_POST['make']) && isset($_POST['mileage']) && isset($_POST['year'])){
         if(strlen($_POST['make'])<1){
             $_SESSION['error'] = 'Make is required';
-            header('Location:add.php');
+            header('Location:edit.php');
             return;
         }
         elseif(!is_numeric($_POST['year']) || !is_numeric($_POST['mileage'])){
             $_SESSION['error'] = 'Mileage and year must be numeric';
-            header('location:add.php');
+            header('location:edit.php');
             return;
         }
         else{
